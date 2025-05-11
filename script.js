@@ -1,26 +1,43 @@
-// Custom cursor
-const cursor = document.querySelector(".cursor");
-const cursorFollower = document.querySelector(".cursor-follower");
+// Custom cursor - only for non-touch devices
+function isTouchDevice() {
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    navigator.msMaxTouchPoints > 0
+  );
+}
 
-document.addEventListener("mousemove", (e) => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
+// Initialize cursor effects only on non-touch devices
+if (!isTouchDevice()) {
+  const cursor = document.querySelector(".cursor");
+  const cursorFollower = document.querySelector(".cursor-follower");
 
-  setTimeout(() => {
-    cursorFollower.style.left = e.clientX + "px";
-    cursorFollower.style.top = e.clientY + "px";
-  }, 100);
-});
+  document.addEventListener("mousemove", (e) => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
 
-document.addEventListener("mousedown", () => {
-  cursor.style.transform = "scale(0.8)";
-  cursorFollower.style.transform = "scale(0.8)";
-});
+    setTimeout(() => {
+      cursorFollower.style.left = e.clientX + "px";
+      cursorFollower.style.top = e.clientY + "px";
+    }, 100);
+  });
 
-document.addEventListener("mouseup", () => {
-  cursor.style.transform = "scale(1)";
-  cursorFollower.style.transform = "scale(1)";
-});
+  document.addEventListener("mousedown", () => {
+    cursor.style.transform = "scale(0.8)";
+    cursorFollower.style.transform = "scale(0.8)";
+  });
+
+  document.addEventListener("mouseup", () => {
+    cursor.style.transform = "scale(1)";
+    cursorFollower.style.transform = "scale(1)";
+  });
+} else {
+  // Remove cursor elements on touch devices
+  const cursor = document.querySelector(".cursor");
+  const cursorFollower = document.querySelector(".cursor-follower");
+  if (cursor) cursor.remove();
+  if (cursorFollower) cursorFollower.remove();
+}
 
 // Typing animation
 const typedTextSpan = document.querySelector(".typed-text");
@@ -74,10 +91,28 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 const menuBtn = document.querySelector(".menu-btn");
 const navLinks = document.querySelector(".nav-links");
 
-menuBtn.addEventListener("click", () => {
-  menuBtn.classList.toggle("open");
-  navLinks.classList.toggle("active");
-});
+if (menuBtn && navLinks) {
+  menuBtn.addEventListener("click", () => {
+    menuBtn.classList.toggle("open");
+    navLinks.classList.toggle("active");
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+      menuBtn.classList.remove("open");
+      navLinks.classList.remove("active");
+    }
+  });
+
+  // Close menu when clicking on a nav link
+  navLinks.querySelectorAll(".nav-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menuBtn.classList.remove("open");
+      navLinks.classList.remove("active");
+    });
+  });
+}
 
 // Form submission
 const contactForm = document.querySelector(".contact-form");
@@ -380,15 +415,6 @@ VanillaTilt.init(document.querySelectorAll(".project-card"), {
   "max-glare": 0.3,
   scale: 1.05,
 });
-
-// Function to detect if device is touch-enabled
-function isTouchDevice() {
-  return (
-    "ontouchstart" in window ||
-    navigator.maxTouchPoints > 0 ||
-    navigator.msMaxTouchPoints > 0
-  );
-}
 
 // Initialize cursor trail only on non-touch devices
 document.addEventListener("DOMContentLoaded", function () {

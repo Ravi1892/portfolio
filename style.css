@@ -28,71 +28,75 @@ body {
   overflow-x: hidden;
 }
 
-/* Custom Cursor */
-.cursor {
-  width: 10px;
-  height: 10px;
-  background: var(--primary-color);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.2s ease;
+/* Custom Cursor - Only for non-touch devices */
+@media (hover: hover) {
+  .cursor {
+    width: 10px;
+    height: 10px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.2s ease;
+  }
+
+  .cursor-follower {
+    width: 30px;
+    height: 30px;
+    background: rgba(74, 144, 226, 0.3);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.6s ease, width 0.3s ease, height 0.3s ease;
+  }
+
+  /* Cursor Trail Effect */
+  .cursor-trail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    display: block;
+  }
+
+  .trail-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0.5;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, opacity 0.3s;
+    will-change: transform;
+  }
+
+  .trail-dot:nth-child(1) {
+    width: 12px;
+    height: 12px;
+    opacity: 0.8;
+  }
+  .trail-dot:nth-child(2) {
+    width: 10px;
+    height: 10px;
+    opacity: 0.7;
+  }
+  .trail-dot:nth-child(3) {
+    width: 8px;
+    height: 8px;
+    opacity: 0.6;
+  }
 }
 
-.cursor-follower {
-  width: 30px;
-  height: 30px;
-  background: rgba(74, 144, 226, 0.3);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9998;
-  transition: transform 0.6s ease, width 0.3s ease, height 0.3s ease;
-}
-
-/* Cursor Trail Effect */
-.cursor-trail {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 9999;
-  display: block;
-}
-
-.trail-dot {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  background: var(--primary-color);
-  border-radius: 50%;
-  opacity: 0.5;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s, opacity 0.3s;
-  will-change: transform;
-}
-
-.trail-dot:nth-child(1) {
-  width: 12px;
-  height: 12px;
-  opacity: 0.8;
-}
-.trail-dot:nth-child(2) {
-  width: 10px;
-  height: 10px;
-  opacity: 0.7;
-}
-.trail-dot:nth-child(3) {
-  width: 8px;
-  height: 8px;
-  opacity: 0.6;
-}
-
-/* Hide cursor trail on mobile devices */
-@media (max-width: 768px), (hover: none) {
+/* Hide cursor effects on touch devices */
+@media (hover: none) {
+  .cursor,
+  .cursor-follower,
   .cursor-trail {
     display: none !important;
   }
@@ -176,6 +180,10 @@ nav {
 .menu-btn {
   display: none;
   cursor: pointer;
+  background: none;
+  border: none;
+  padding: 10px;
+  z-index: 1001;
 }
 
 .menu-btn__burger {
@@ -184,6 +192,7 @@ nav {
   background: var(--text-color);
   border-radius: 5px;
   transition: var(--transition);
+  position: relative;
 }
 
 .menu-btn__burger::before,
@@ -203,6 +212,19 @@ nav {
 
 .menu-btn__burger::after {
   transform: translateY(8px);
+}
+
+/* Menu Button Animation */
+.menu-btn.open .menu-btn__burger {
+  background: transparent;
+}
+
+.menu-btn.open .menu-btn__burger::before {
+  transform: rotate(45deg);
+}
+
+.menu-btn.open .menu-btn__burger::after {
+  transform: rotate(-45deg);
 }
 
 /* Home Section */
@@ -667,6 +689,10 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+  }
+
   .nav-links {
     position: fixed;
     top: 70px;
@@ -676,11 +702,29 @@ footer {
     padding: 1rem;
     flex-direction: column;
     align-items: center;
+    transform: translateY(-150%);
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+  }
+
+  .nav-links.active {
+    transform: translateY(0);
+  }
+
+  .nav-link {
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-link::before {
     display: none;
   }
 
-  .menu-btn {
-    display: block;
+  .nav-link:hover {
+    background: var(--light-bg);
+    border-radius: 5px;
   }
 
   .home-content h1 {

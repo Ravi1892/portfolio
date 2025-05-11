@@ -253,9 +253,10 @@ const projects = [
     title: "TIC-TAC-TOE",
     description:
       "A Advanced Tic-Tac-Toe game built with HTML, CSS, and JavaScript With a modern and clean design and a advance AI opponent .",
-    image: "https://raw.githubusercontent.com/Ravi1892/TTT/refs/heads/main/Screenshot%202025-05-11%20181229.png",
+    image:
+      "https://raw.githubusercontent.com/Ravi1892/TTT/refs/heads/main/Screenshot%202025-05-11%20181229.png",
     tags: ["HTML", "CSS", "JavaScript"],
-    liveLink: "https://itsravi.online",
+    liveLink: "https://ttt.itsravi.online",
     githubLink: "https://github.com/Ravi1892/TTT",
   },
   // Add more projects here following the same structure
@@ -271,9 +272,9 @@ const projects = [
   },
   {
     title: "Tetris",
-    description:
-      "A Tetris game built with HTML, CSS, and JavaScript.",
-    image: "https://cdn.theculturetrip.com/wp-content/uploads/2017/06/shutterstock_316193825.jpg",
+    description: "A Tetris game built with HTML, CSS, and JavaScript.",
+    image:
+      "https://cdn.theculturetrip.com/wp-content/uploads/2017/06/shutterstock_316193825.jpg",
     tags: ["HTML", "CSS", "JavaScript"],
     liveLink: "https://ravi1892.github.io/Tetris-Game/",
     githubLink: "https://github.com/Ravi1892/Tetris-Game",

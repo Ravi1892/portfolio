@@ -385,7 +385,7 @@ nav {
 
 /* About Section */
 #about {
-  padding: 8rem 1rem;
+  padding: 3rem 1rem;
   background: var(--white);
 }
 
@@ -472,7 +472,7 @@ nav {
 
 /* Projects Section */
 #projects {
-  padding: 8rem 1rem;
+  padding: 3rem 1rem;
   background: var(--light-bg);
 }
 
@@ -584,7 +584,7 @@ nav {
 
 /* Contact Section */
 #contact {
-  padding: 8rem 1rem;
+  padding: 3rem 1rem;
   background: var(--white);
 }
 
@@ -894,10 +894,12 @@ footer {
 /* Section Headings */
 section h2 {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   margin-bottom: 3rem;
   position: relative;
   padding-bottom: 1rem;
+  font-weight: 700;
+  color: var(--secondary-color);
 }
 
 section h2::after {
@@ -906,8 +908,8 @@ section h2::after {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
-  height: 3px;
+  width: 150px;
+  height: 4px;
   background: var(--primary-color);
   border-radius: 2px;
 }

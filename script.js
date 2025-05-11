@@ -381,53 +381,64 @@ VanillaTilt.init(document.querySelectorAll(".project-card"), {
   scale: 1.05,
 });
 
-// Add a dynamic cursor trail effect
-const cursorTrail = document.createElement("div");
-cursorTrail.className = "cursor-trail";
-document.body.appendChild(cursorTrail);
-
-const trail = [];
-const trailLength = 20;
-
-for (let i = 0; i < trailLength; i++) {
-  const dot = document.createElement("div");
-  dot.className = "trail-dot";
-  cursorTrail.appendChild(dot);
-  trail.push({
-    element: dot,
-    x: 0,
-    y: 0,
-  });
+// Function to detect if device is touch-enabled
+function isTouchDevice() {
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    navigator.msMaxTouchPoints > 0
+  );
 }
 
-let mouseX = 0;
-let mouseY = 0;
+// Only initialize cursor trail if not on a touch device
+if (!isTouchDevice()) {
+  const cursorTrail = document.createElement("div");
+  cursorTrail.className = "cursor-trail";
+  document.body.appendChild(cursorTrail);
 
-document.addEventListener("mousemove", (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
+  const trail = [];
+  const trailLength = 20;
 
-function animateTrail() {
-  let x = mouseX;
-  let y = mouseY;
+  for (let i = 0; i < trailLength; i++) {
+    const dot = document.createElement("div");
+    dot.className = "trail-dot";
+    cursorTrail.appendChild(dot);
+    trail.push({
+      element: dot,
+      x: 0,
+      y: 0,
+    });
+  }
 
-  trail.forEach((dot, index) => {
-    const nextDot = trail[index + 1] || trail[0];
+  let mouseX = 0;
+  let mouseY = 0;
 
-    x += (nextDot.x - x) * 0.3;
-    y += (nextDot.y - y) * 0.3;
-
-    dot.x = x;
-    dot.y = y;
-
-    dot.element.style.transform = `translate(${x}px, ${y}px)`;
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
   });
 
-  requestAnimationFrame(animateTrail);
-}
+  function animateTrail() {
+    let x = mouseX;
+    let y = mouseY;
 
-animateTrail();
+    trail.forEach((dot, index) => {
+      const nextDot = trail[index + 1] || trail[0];
+
+      x += (nextDot.x - x) * 0.3;
+      y += (nextDot.y - y) * 0.3;
+
+      dot.x = x;
+      dot.y = y;
+
+      dot.element.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    requestAnimationFrame(animateTrail);
+  }
+
+  animateTrail();
+}
 
 // Add a dynamic typing effect for project descriptions
 function typeWriter(element, text, speed = 50) {

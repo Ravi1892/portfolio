@@ -85,6 +85,13 @@ body {
   opacity: 0.6;
 }
 
+/* Hide cursor trail on mobile devices */
+@media (max-width: 768px) {
+  .cursor-trail {
+    display: none !important;
+  }
+}
+
 /* Navigation */
 nav {
   position: fixed;

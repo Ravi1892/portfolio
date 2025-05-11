@@ -390,55 +390,70 @@ function isTouchDevice() {
   );
 }
 
-// Only initialize cursor trail if not on a touch device
-if (!isTouchDevice()) {
-  const cursorTrail = document.createElement("div");
-  cursorTrail.className = "cursor-trail";
-  document.body.appendChild(cursorTrail);
+// Initialize cursor trail only on non-touch devices
+document.addEventListener("DOMContentLoaded", function () {
+  if (!isTouchDevice()) {
+    // Remove any existing cursor trail
+    const existingTrail = document.querySelector(".cursor-trail");
+    if (existingTrail) {
+      existingTrail.remove();
+    }
 
-  const trail = [];
-  const trailLength = 20;
+    // Create new cursor trail
+    const cursorTrail = document.createElement("div");
+    cursorTrail.className = "cursor-trail";
+    document.body.appendChild(cursorTrail);
 
-  for (let i = 0; i < trailLength; i++) {
-    const dot = document.createElement("div");
-    dot.className = "trail-dot";
-    cursorTrail.appendChild(dot);
-    trail.push({
-      element: dot,
-      x: 0,
-      y: 0,
-    });
-  }
+    const trail = [];
+    const trailLength = 20;
 
-  let mouseX = 0;
-  let mouseY = 0;
+    for (let i = 0; i < trailLength; i++) {
+      const dot = document.createElement("div");
+      dot.className = "trail-dot";
+      cursorTrail.appendChild(dot);
+      trail.push({
+        element: dot,
+        x: 0,
+        y: 0,
+      });
+    }
 
-  document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
+    let mouseX = 0;
+    let mouseY = 0;
 
-  function animateTrail() {
-    let x = mouseX;
-    let y = mouseY;
-
-    trail.forEach((dot, index) => {
-      const nextDot = trail[index + 1] || trail[0];
-
-      x += (nextDot.x - x) * 0.3;
-      y += (nextDot.y - y) * 0.3;
-
-      dot.x = x;
-      dot.y = y;
-
-      dot.element.style.transform = `translate(${x}px, ${y}px)`;
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     });
 
-    requestAnimationFrame(animateTrail);
-  }
+    function animateTrail() {
+      let x = mouseX;
+      let y = mouseY;
 
-  animateTrail();
-}
+      trail.forEach((dot, index) => {
+        const nextDot = trail[index + 1] || trail[0];
+
+        x += (nextDot.x - x) * 0.3;
+        y += (nextDot.y - y) * 0.3;
+
+        dot.x = x;
+        dot.y = y;
+
+        dot.element.style.transform = `translate(${x}px, ${y}px)`;
+      });
+
+      requestAnimationFrame(animateTrail);
+    }
+
+    animateTrail();
+  } else {
+    // Remove cursor trail if it exists on touch devices
+    const existingTrail = document.querySelector(".cursor-trail");
+    if (existingTrail) {
+      existingTrail.remove();
+    }
+  }
+});
 
 // Add a dynamic typing effect for project descriptions
 function typeWriter(element, text, speed = 50) {

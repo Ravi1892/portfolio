@@ -77,20 +77,66 @@ document.addEventListener("DOMContentLoaded", function () {
   if (textArray.length) setTimeout(type, newTextDelay + 250);
 });
 
-// Smooth scrolling for navigation links
+// Prevent default navigation behavior
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
     e.preventDefault();
     const targetId = this.getAttribute("href");
     const targetElement = document.querySelector(targetId);
-
     if (targetElement) {
-      window.scrollTo({
-        top: targetElement.offsetTop - 70, // Adjust for header height
-        behavior: "smooth",
-      });
+      targetElement.scrollIntoView({ behavior: "smooth" });
     }
   });
+});
+
+// Function to scroll to home without using navigation
+function scrollToHome() {
+  const homeSection = document.getElementById("home");
+  if (homeSection) {
+    homeSection.scrollIntoView({ behavior: "instant" });
+    window.scrollTo(0, 0);
+  }
+}
+
+// Prevent scroll position from being saved
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+// Handle page load
+window.addEventListener("load", function () {
+  // Remove any active states from navigation
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.classList.remove("active");
+  });
+
+  // Force scroll to home
+  scrollToHome();
+});
+
+// Handle before unload
+window.addEventListener("beforeunload", function () {
+  window.scrollTo(0, 0);
+});
+
+// Create and add scroll to top button
+const scrollTopBtn = document.createElement("button");
+scrollTopBtn.innerHTML = "↑";
+scrollTopBtn.className = "scroll-top-btn";
+document.body.appendChild(scrollTopBtn);
+
+// Show/hide scroll to top button based on scroll position
+window.addEventListener("scroll", () => {
+  if (window.pageYOffset > 300) {
+    scrollTopBtn.style.display = "flex";
+  } else {
+    scrollTopBtn.style.display = "none";
+  }
+});
+
+// Scroll to top when button is clicked
+scrollTopBtn.addEventListener("click", () => {
+  scrollToHome();
 });
 
 // Mobile menu toggle
@@ -541,59 +587,3 @@ setInterval(updateTheme, 60000); // Update every minute
 const pattern = document.createElement("div");
 pattern.className = "background-pattern";
 document.body.appendChild(pattern);
-
-// Prevent scroll position from being saved
-if ("scrollRestoration" in history) {
-  history.scrollRestoration = "manual";
-}
-
-// Function to force scroll to top/home
-function forceScrollToTop() {
-  // Force scroll to top
-  window.scrollTo(0, 0);
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
-
-  // Force scroll to home section
-  const homeSection = document.getElementById("home");
-  if (homeSection) {
-    homeSection.scrollIntoView({ behavior: "instant" });
-  }
-}
-
-// Call on initial load
-forceScrollToTop();
-
-// Call on window load (after all resources are loaded)
-window.addEventListener("load", function () {
-  forceScrollToTop();
-
-  // Additional call after a small delay to ensure it works
-  setTimeout(forceScrollToTop, 100);
-});
-
-// Call on DOM content loaded
-document.addEventListener("DOMContentLoaded", forceScrollToTop);
-
-// Call before page unload
-window.addEventListener("beforeunload", forceScrollToTop);
-
-// Create and add scroll to top button
-const scrollTopBtn = document.createElement("button");
-scrollTopBtn.innerHTML = "↑";
-scrollTopBtn.className = "scroll-top-btn";
-document.body.appendChild(scrollTopBtn);
-
-// Show/hide scroll to top button based on scroll position
-window.addEventListener("scroll", () => {
-  if (window.pageYOffset > 300) {
-    scrollTopBtn.style.display = "flex";
-  } else {
-    scrollTopBtn.style.display = "none";
-  }
-});
-
-// Scroll to top when button is clicked
-scrollTopBtn.addEventListener("click", () => {
-  forceScrollToTop();
-});

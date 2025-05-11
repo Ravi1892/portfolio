@@ -926,3 +926,6 @@ section .container {
   margin: 0 auto;
   padding: 0 1rem;
 }
+#skills {
+  font-size: 3.5rem;
+}

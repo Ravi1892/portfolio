@@ -690,6 +690,62 @@ nav {
   color: var(--primary-color);
 }
 
+/* Contact Form Submit Button */
+.contact-form button[type="submit"] {
+  background: var(--primary-color);
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-form button[type="submit"]:hover {
+  background: var(--secondary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-form button[type="submit"]:active {
+  transform: translateY(-1px);
+}
+
+.contact-form button[type="submit"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.contact-form button[type="submit"]:hover::before {
+  left: 100%;
+}
+
+/* Responsive styles for the button */
+@media (max-width: 768px) {
+  .contact-form button[type="submit"] {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
 /* Footer */
 footer {
   background: var(--secondary-color);

@@ -81,9 +81,15 @@ document.addEventListener("DOMContentLoaded", function () {
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
     e.preventDefault();
-    document.querySelector(this.getAttribute("href")).scrollIntoView({
-      behavior: "smooth",
-    });
+    const targetId = this.getAttribute("href");
+    const targetElement = document.querySelector(targetId);
+
+    if (targetElement) {
+      window.scrollTo({
+        top: targetElement.offsetTop - 70, // Adjust for header height
+        behavior: "smooth",
+      });
+    }
   });
 });
 
@@ -211,7 +217,8 @@ const projects = [
     title: "E-commerce Website",
     description:
       "A full-stack e-commerce platform with user authentication, product management, and payment integration.",
-    image: "project2.jpg",
+    image:
+      "https://static.vecteezy.com/system/resources/previews/006/547/178/original/creative-modern-abstract-ecommerce-logo-design-colorful-gradient-online-shopping-bag-logo-design-template-free-vector.jpg",
     tags: ["React", "Express", "MongoDB", "Stripe"],
     liveLink: "#",
     githubLink: "#",
@@ -272,7 +279,8 @@ function renderProjects() {
 // Call renderProjects when the DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
   renderProjects();
-  // ... rest of your existing DOMContentLoaded code ...
+  // Force scroll to top
+  window.scrollTo(0, 0);
 });
 
 // Initialize particles.js
@@ -533,3 +541,38 @@ setInterval(updateTheme, 60000); // Update every minute
 const pattern = document.createElement("div");
 pattern.className = "background-pattern";
 document.body.appendChild(pattern);
+
+// Force scroll to top on page load and refresh
+window.addEventListener("load", function () {
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+});
+
+// Prevent scroll position from being saved
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+// Create and add scroll to top button
+const scrollTopBtn = document.createElement("button");
+scrollTopBtn.innerHTML = "↑";
+scrollTopBtn.className = "scroll-top-btn";
+document.body.appendChild(scrollTopBtn);
+
+// Show/hide scroll to top button based on scroll position
+window.addEventListener("scroll", () => {
+  if (window.pageYOffset > 300) {
+    scrollTopBtn.style.display = "flex";
+  } else {
+    scrollTopBtn.style.display = "none";
+  }
+});
+
+// Scroll to top when button is clicked
+scrollTopBtn.addEventListener("click", () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});

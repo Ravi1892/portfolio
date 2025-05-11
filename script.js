@@ -542,36 +542,41 @@ const pattern = document.createElement("div");
 pattern.className = "background-pattern";
 document.body.appendChild(pattern);
 
-// Force scroll to top immediately
-window.scrollTo(0, 0);
-
 // Prevent scroll position from being saved
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
 
-// Force scroll to top on page load
-window.addEventListener("load", function () {
-  setTimeout(function () {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }, 0);
-});
-
-// Force scroll to top on DOMContentLoaded
-document.addEventListener("DOMContentLoaded", function () {
-  setTimeout(function () {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }, 0);
-});
-
-// Force scroll to top before unload
-window.addEventListener("beforeunload", function () {
+// Function to force scroll to top/home
+function forceScrollToTop() {
+  // Force scroll to top
   window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+
+  // Force scroll to home section
+  const homeSection = document.getElementById("home");
+  if (homeSection) {
+    homeSection.scrollIntoView({ behavior: "instant" });
+  }
+}
+
+// Call on initial load
+forceScrollToTop();
+
+// Call on window load (after all resources are loaded)
+window.addEventListener("load", function () {
+  forceScrollToTop();
+
+  // Additional call after a small delay to ensure it works
+  setTimeout(forceScrollToTop, 100);
 });
+
+// Call on DOM content loaded
+document.addEventListener("DOMContentLoaded", forceScrollToTop);
+
+// Call before page unload
+window.addEventListener("beforeunload", forceScrollToTop);
 
 // Create and add scroll to top button
 const scrollTopBtn = document.createElement("button");
@@ -590,8 +595,5 @@ window.addEventListener("scroll", () => {
 
 // Scroll to top when button is clicked
 scrollTopBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
+  forceScrollToTop();
 });

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ravi Verma - Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  </head>
+  <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-content">
+        <div class="logo">Ravi Verma</div>
+        <ul class="nav-links">
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="menu-btn">
+          <div class="menu-btn__burger"></div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+      <div class="home-content">
+        <div class="text-content">
+          <h1>Hi, I'm <span class="highlight">Ravi Verma</span></h1>
+          <div class="typing-text">I'm a <span class="typed-text"></span></div>
+        </div>
+        <div class="scroll-indicator"></div>
+      </div>
+    </section>
+
+    <!-- Social Links -->
+    <div class="social-links">
+      <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <!-- About Section -->
+    <section id="about">
+      <div class="container">
+        <h2>About Me</h2>
+        <p>
+          I'm a passionate developer with expertise in creating beautiful and
+          functional web applications. I love turning complex problems into
+          simple, beautiful, and intuitive designs.
+        </p>
+
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number">5+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Projects Completed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">30+</span>
+            <span class="stat-label">Happy Clients</span>
+          </div>
+        </div>
+
+        <div class="skills">
+          <h3>Skills</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Python</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <div class="container">
+        <h2>My Projects</h2>
+        <div class="projects-grid">
+          <!-- Project cards will be dynamically inserted here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <h2>Get In Touch</h2>
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <h3>Email</h3>
+                <p>your.email@example.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <div>
+                <h3>Phone</h3>
+                <p>+1 234 567 890</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <h3>Location</h3>
+                <p>Your City, Country</p>
+              </div>
+            </div>
+          </div>
+          <form class="contact-form">
+            <div class="form-group">
+              <input type="text" id="name" required />
+              <label for="name">Ravi Verma</label>
+            </div>
+            <div class="form-group">
+              <input type="email" id="email" required />
+              <label for="email">Your Email</label>
+            </div>
+            <div class="form-group">
+              <textarea id="message" required></textarea>
+              <label for="message">Your Message</label>
+            </div>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 Ravi Verma. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Particles Container -->
+    <div id="particles-js"></div>
+  </body>
+</html>

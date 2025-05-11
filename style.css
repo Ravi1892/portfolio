@@ -442,6 +442,16 @@ nav {
 }
 
 /* Skills */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
 .skill-tag {
   background: var(--light-bg);
   padding: 0.8rem 1.5rem;
@@ -449,6 +459,9 @@ nav {
   font-size: 0.9rem;
   transition: var(--transition);
   cursor: pointer;
+  margin: 0.1rem;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 .skill-tag:hover {

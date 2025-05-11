@@ -279,7 +279,7 @@ function renderProjects() {
 // Call renderProjects when the DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
   renderProjects();
-  // Force scroll to top
+  // Force scroll to top immediately
   window.scrollTo(0, 0);
 });
 
@@ -542,17 +542,36 @@ const pattern = document.createElement("div");
 pattern.className = "background-pattern";
 document.body.appendChild(pattern);
 
-// Force scroll to top on page load and refresh
-window.addEventListener("load", function () {
-  window.scrollTo(0, 0);
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
-});
+// Force scroll to top immediately
+window.scrollTo(0, 0);
 
 // Prevent scroll position from being saved
 if ("scrollRestoration" in history) {
   history.scrollRestoration = "manual";
 }
+
+// Force scroll to top on page load
+window.addEventListener("load", function () {
+  setTimeout(function () {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, 0);
+});
+
+// Force scroll to top on DOMContentLoaded
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, 0);
+});
+
+// Force scroll to top before unload
+window.addEventListener("beforeunload", function () {
+  window.scrollTo(0, 0);
+});
 
 // Create and add scroll to top button
 const scrollTopBtn = document.createElement("button");

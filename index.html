@@ -26,7 +26,7 @@
     <!-- Particles.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   </head>
-  <body>
+  <body class="dark-theme">
     <!-- Custom Cursor -->
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
@@ -35,12 +35,17 @@
     <nav>
       <div class="nav-content">
         <div class="logo">Ravi Verma</div>
-        <ul class="nav-links">
-          <li><a href="#home" class="nav-link">Home</a></li>
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+          <button class="theme-btn" onclick="toggleTheme()">
+            <i class="fas fa-sun"></i>
+          </button>
+        </div>
         <div class="menu-btn">
           <div class="menu-btn__burger"></div>
         </div>
@@ -49,6 +54,7 @@
 
     <!-- Home Section -->
     <section id="home">
+      <div id="particles-js"></div>
       <div class="home-content">
         <div class="text-content">
           <h1>Hi, I'm <span class="highlight">Ravi</span></h1>
@@ -176,11 +182,11 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
-    <script src="script.js"></script>
-
-    <!-- Particles Container -->
-    <div id="particles-js"></div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+    <script
+      src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"
+      defer
+    ></script>
+    <script src="script.js" defer></script>
   </body>
 </html>

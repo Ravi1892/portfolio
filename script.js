@@ -331,61 +331,91 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // Initialize particles.js
-particlesJS("particles-js", {
-  particles: {
-    number: {
-      value: 80,
-      density: {
+document.addEventListener("DOMContentLoaded", function () {
+  particlesJS("particles-js", {
+    particles: {
+      number: {
+        value: 100,
+        density: {
+          enable: true,
+          value_area: 800,
+        },
+      },
+      color: {
+        value: "#4a90e2",
+      },
+      shape: {
+        type: "circle",
+      },
+      opacity: {
+        value: 0.8,
+        random: true,
+        anim: {
+          enable: true,
+          speed: 1,
+          opacity_min: 0.1,
+          sync: false,
+        },
+      },
+      size: {
+        value: 4,
+        random: true,
+        anim: {
+          enable: true,
+          speed: 2,
+          size_min: 0.1,
+          sync: false,
+        },
+      },
+      line_linked: {
         enable: true,
-        value_area: 800,
+        distance: 150,
+        color: "#4a90e2",
+        opacity: 0.6,
+        width: 1.5,
+      },
+      move: {
+        enable: true,
+        speed: 3,
+        direction: "none",
+        random: true,
+        straight: false,
+        out_mode: "out",
+        bounce: false,
+        attract: {
+          enable: true,
+          rotateX: 600,
+          rotateY: 1200,
+        },
       },
     },
-    color: {
-      value: "#4a90e2",
-    },
-    shape: {
-      type: "circle",
-    },
-    opacity: {
-      value: 0.5,
-      random: false,
-    },
-    size: {
-      value: 3,
-      random: true,
-    },
-    line_linked: {
-      enable: true,
-      distance: 150,
-      color: "#4a90e2",
-      opacity: 0.4,
-      width: 1,
-    },
-    move: {
-      enable: true,
-      speed: 2,
-      direction: "none",
-      random: false,
-      straight: false,
-      out_mode: "out",
-      bounce: false,
-    },
-  },
-  interactivity: {
-    detect_on: "canvas",
-    events: {
-      onhover: {
-        enable: true,
-        mode: "grab",
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: {
+          enable: true,
+          mode: "grab",
+        },
+        onclick: {
+          enable: true,
+          mode: "push",
+        },
+        resize: true,
       },
-      onclick: {
-        enable: true,
-        mode: "push",
+      modes: {
+        grab: {
+          distance: 200,
+          line_linked: {
+            opacity: 1,
+          },
+        },
+        push: {
+          particles_nb: 4,
+        },
       },
-      resize: true,
     },
-  },
-  retina_detect: true,
+    retina_detect: true,
+  });
 });
 
 // Scroll Progress Bar
@@ -588,3 +618,37 @@ setInterval(updateTheme, 60000); // Update every minute
 const pattern = document.createElement("div");
 pattern.className = "background-pattern";
 document.body.appendChild(pattern);
+
+// Theme toggle functionality
+function toggleTheme() {
+  const themeBtn = document.querySelector(".theme-btn");
+  const icon = themeBtn.querySelector("i");
+
+  document.body.classList.toggle("dark-theme");
+
+  // Update icon based on theme
+  if (document.body.classList.contains("dark-theme")) {
+    icon.className = "fas fa-sun";
+    localStorage.setItem("theme", "dark");
+  } else {
+    icon.className = "fas fa-moon";
+    localStorage.setItem("theme", "light");
+  }
+}
+
+// Check for saved theme on page load
+document.addEventListener("DOMContentLoaded", function () {
+  const savedTheme = localStorage.getItem("theme");
+  const themeBtn = document.querySelector(".theme-btn");
+  const icon = themeBtn.querySelector("i");
+
+  // Set dark theme as default if no theme is saved
+  if (!savedTheme) {
+    document.body.classList.add("dark-theme");
+    icon.className = "fas fa-sun";
+    localStorage.setItem("theme", "dark");
+  } else if (savedTheme === "dark") {
+    document.body.classList.add("dark-theme");
+    icon.className = "fas fa-sun";
+  }
+});
